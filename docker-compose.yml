@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+    build: ./db
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: tododb
+    ports:
+      - "5433:5432"
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - ./api-gateway:/usr/src/app
+      - /usr/src/app/node_modules
+
