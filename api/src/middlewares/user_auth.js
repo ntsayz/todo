@@ -7,8 +7,8 @@ const saveUser = (req, res, next) => {
     }
 
     // Check for valid email format (simple validation)
-    const emailRegex = /^\S+@\S+\.\S+$/;
-    if (!emailRegex.test(email)) {
+
+    if (is_email_valid(email)) {
         return res.status(400).send("Invalid email format.");
     }
 
@@ -21,7 +21,18 @@ const saveUser = (req, res, next) => {
     next();
 };
 
+
+const is_email_valid = (email) => {
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    if (!emailRegex.test(email)) {
+        return false;
+    }
+}
+
+// implement a middleware that checks if the user is logged in
+
 module.exports = {
     saveUser,
+    is_email_valid
     // ... other exported middlewares if any
 };

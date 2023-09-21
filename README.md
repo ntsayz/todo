@@ -53,7 +53,7 @@
 
 ### **User Management**
 
-### **POST** `/users/register`
+### **POST** `/users/signup`
 **Purpose**: New user registration.
 
 **Body**:
@@ -69,6 +69,7 @@ Response:
 
     200 OK with user object if successful.
     Error messages for validation failures.
+
 
 ### **POST** `/users/login`
 
