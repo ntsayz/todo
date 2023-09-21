@@ -9,13 +9,13 @@ services:
     ports:
       - "5433:5432"
 
-  api-gateway:
-    build: ./api-gateway
+  api:
+    build: ./api
     ports:
       - "3000:3000"
     depends_on:
       - db
     volumes:
-      - ./api-gateway:/usr/src/app
+      - ./api:/usr/src/app
       - /usr/src/app/node_modules
 

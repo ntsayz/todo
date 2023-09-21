@@ -1,18 +1,13 @@
 const express = require('express');
-const { Pool } = require('pg');
+const pool = require('./src/models/database');
 
 const app = express();
 app.use(express.json());
 const port = 3000;
 
-const pool = new Pool({
-  host: 'db',  // this should match the service name of PostgreSQL in docker-compose.yml
-  user: 'postgres',
-  password: 'mysecretpassword',
-  database: 'tododb'
-});
 
 app.get('/', async (req, res) => {
+
   const result = await pool.query('SELECT NOW()');
   res.send(`Database says the time is: ${result.rows[0].now}`);
 });
