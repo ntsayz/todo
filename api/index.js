@@ -13,7 +13,7 @@ app.get('/', async (req, res) => {
   res.send(`Database says the time is: ${result.rows[0].now}`);
 });
 
-//app.use('api/users',userRoutes);
+app.use('api/users',userRoutes);
 
 app.get('/todo_all',async(req,res)  => {
   try {
