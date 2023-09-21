@@ -1,5 +1,6 @@
 const express = require('express');
 const pool = require('./src/models/database');
+const userRoutes = require ('./src/routes/user_routes')
 
 const app = express();
 app.use(express.json());
@@ -11,6 +12,8 @@ app.get('/', async (req, res) => {
   const result = await pool.query('SELECT NOW()');
   res.send(`Database says the time is: ${result.rows[0].now}`);
 });
+
+app.use('api/users',userRoutes);
 
 app.get('/todo_all',async(req,res)  => {
   try {

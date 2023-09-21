@@ -5,18 +5,24 @@ const user_model = require('../models/user_model');
 const signup = async (req, res) => {
     try {
         const { username, email, full_name, password } = req.body;
-        
+
+        // Hash the password
+        const saltRounds = 10;  // or another number you prefer
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
         if (await user_model.doesUserExist(username, email)) {
             return res.status(409).send("Username or email already exists.");
         }
 
-        const user_id = await user_model.create_user(username, email, full_name, password);
+        const user_id = await user_model.create_user(username, email, full_name, hashedPassword);  // Note: passing hashedPassword instead of password
         res.json({ success: true, user_id });
 
     } catch (error) {
+        console.error("Error registering user:", error);
         res.status(500).send("Error registering user.");
     }
 };
+
 
 const getUserById = async (req, res) => {
     try {
