@@ -1,4 +1,4 @@
-//require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const pool = require('./src/models/database');
 const userRoutes = require ('./src/routes/user_routes')
