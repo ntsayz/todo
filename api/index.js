@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 const express = require('express');
 const pool = require('./src/models/database');
 const userRoutes = require ('./src/routes/user_routes')
@@ -16,7 +16,7 @@ app.get('/', async (req, res) => {
 });
 
 app.use('/api/users',userRoutes);
-app.use('/api/todos', auth, todoRoutes);
+app.use('/api/todos',auth,todoRoutes);
 
 
 app.listen(port, () => {

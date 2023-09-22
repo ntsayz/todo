@@ -1,6 +1,3 @@
-env_file:
-  - ./api/.env
-
 version: '3'
 
 services:
