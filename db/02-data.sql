@@ -1,4 +1,4 @@
-INSERT INTO todos (title, description, is_completed) VALUES 
-('Learn Docker', 'Go through Docker documentation and run some basic commands.', FALSE),
-('Set up PostgreSQL', 'Install and configure PostgreSQL for local development.', FALSE),
-('Work on TodoApp', 'Continue developing features for the Todo application.', FALSE);
+INSERT INTO todos (title, description, is_completed, created_by) VALUES 
+('Learn Docker', 'Go through Docker documentation...', FALSE, 1),
+('Set up PostgreSQL', 'Install and configure PostgreSQL...', FALSE, 1),
+('Work on TodoApp', 'Continue developing...', FALSE, 1);

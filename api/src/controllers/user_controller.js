@@ -1,4 +1,5 @@
 const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
 const user_model = require('../models/user_model');
 
 
@@ -44,21 +45,29 @@ const login = async (req, res) => {
     try {
         const { username, password } = req.body;
         
-        // Fetch user details from DB
+        
         const user = await user_model.get_user_by_username_or_email(username);
 
         if (!user) {
             return res.status(404).send("User not found.");
         }
 
-        // Check password
+    
         const passwordMatch = await argon2.verify(user.password, password);
         
         if (!passwordMatch) {
             return res.status(401).send("Invalid credentials.");
         }
+        if(passwordMatch){
+            
+            const token = jwt.sign(
+                { userId: user.id, username: user.username },
+                process.env.JWT_SECRET,  // TODO: replace with process.env.JWT_SECRET
+                { expiresIn: '1h' } 
+            );
+            return res.json({ success: true, token });
+        }
 
-        // Here, you can generate and send a token for the authenticated user, or any other logic you want
 
         res.json({ success: true, user_id: user.id });
 
